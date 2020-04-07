@@ -1,0 +1,43 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Pages</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/jquery.dataTables.min.css")
+    @Scripts.Render("~/Scripts/jquery-3.4.1.min.js")
+    @Scripts.Render("~/Scripts/jquery.dataTables.min.js")
+    @Scripts.Render("~/Scripts/Site2.js")
+</head>
+
+<body>
+    <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+            <li>@Html.ActionLink("Домашняя страница", "Index", "Home")</li>
+            <li>@Html.ActionLink("Сайты", "Sites", "Home")</li>
+            <li>@Html.ActionLink("Страницы", "Pages", "Home")</li>
+        </ul>
+    </div>
+    <div>
+        <p>@ViewBag.Message</p>
+    </div>
+    <table id="table_id" class="display">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>sid</th>
+                <th>url</th>
+                <th>code</th>
+                <th>amount</th>
+                <th>xamount</th>
+            </tr>
+        </thead>        
+    </table>
+</body>
+</html>
+
