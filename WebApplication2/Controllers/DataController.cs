@@ -53,7 +53,7 @@ namespace WebApplication2.Controllers
             "code",
             "amount",
             "xamount"};         
-        private String ListToJson(List<String[]> data, String[] names)
+        private String ListToJson(List<String[]> data, String[] names, int[] escape)
         {
             List<String> buf = new List<String>();
             foreach (var r in data)
@@ -62,10 +62,12 @@ namespace WebApplication2.Controllers
                 for (int i = 0; i < r.Count(); i++)
                 {
                     String encoded = r[i];
-                    if (names[i]=="regex")
+                    bool e = false;
+                    foreach (var c in escape) e |= i == c;
+                    if (e)//(names[i]=="regex")
                         encoded = System.Security.SecurityElement.Escape(r[i]);
                     if (i > 0) s += ",\n";
-                    s += JsonConvert.ToString(names[i]) + ": " + JsonConvert.ToString(encoded);                   
+                    s += JsonConvert.ToString(names[i]) + ": " + JsonConvert.ToString(encoded);
                 }
                 buf.Add(s);
             }
@@ -81,12 +83,16 @@ namespace WebApplication2.Controllers
             String o;
             List<String[]> list = new Work().Get(start, length, 0, out o);
             ViewBag.Message = o;
-
-            string jsonData ="{\"data\":"+ListToJson(list,Names1)+"}";
+            int[] a = { 8 };
+            string jsonData ="{\"data\":"+ListToJson(list,Names1,a)+"}";
             
             JavaScriptSerializer j = new JavaScriptSerializer();
+
+            j.MaxJsonLength = int.MaxValue;
             object obj = j.Deserialize(jsonData, typeof(object));
-            return Json(obj, JsonRequestBehavior.AllowGet);
+            var jsonResult = Json(obj, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;            
         }
         public JsonResult DataRequest2()
         {
@@ -95,12 +101,15 @@ namespace WebApplication2.Controllers
             String o;
             List<String[]> list = new Work().Get(start, length, 1, out o);
             ViewBag.Message = o;
-
-            string jsonData = "{\"data\":" + ListToJson(list, Names2) + "}";
+            int[] a = { 3 };
+            string jsonData = "{\"data\":" + ListToJson(list, Names2, a) + "}";
             
             JavaScriptSerializer j = new JavaScriptSerializer();
+            j.MaxJsonLength = int.MaxValue;
             object obj = j.Deserialize(jsonData, typeof(object));
-            return Json(obj, JsonRequestBehavior.AllowGet);
+            var jsonResult = Json(obj, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
         }
     }
 }

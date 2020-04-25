@@ -90,5 +90,3 @@ D:\Vlasov\!Programs\Visual_Studio\С#\WebApplication2\bin\BouncyCastle.Crypto.dl
 D:\Vlasov\!Programs\Visual_Studio\С#\WebApplication2\bin\Ubiety.Dns.Core.dll
 D:\Vlasov\!Programs\Visual_Studio\С#\WebApplication2\bin\Renci.SshNet.dll
 D:\Vlasov\!Programs\Visual_Studio\С#\WebApplication2\bin\MySql.Data.xml
-D:\Vlasov\!Programs\Visual_Studio\С#\WebApplication2\obj\Debug\WebApplication2.Resource1.resources
-D:\Vlasov\!Programs\Visual_Studio\С#\WebApplication2\obj\Debug\WebApplication2.csproj.GenerateResource.cache
